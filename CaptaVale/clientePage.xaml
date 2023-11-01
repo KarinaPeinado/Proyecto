@@ -26,7 +26,7 @@
 
             <inputLayout:SfTextInputLayout Hint="* Nombre(s)"
                                            ContainerType="Outlined"
-                                           Stroke="#34631a"
+                                           Stroke = "MediumPurple"
                                            ContainerBackground="white"
                                            Margin="10,0,10,0"
                                            InputViewPadding="15,5,15,5"
@@ -41,7 +41,7 @@
 
             <inputLayout:SfTextInputLayout Hint="* Primer Apellido"
                                            ContainerType="Outlined"
-                                           Stroke="#34631a"
+                                           Stroke = "MediumPurple"
                                            ContainerBackground="white"
                                            Margin="10,0,10,0"
                                            InputViewPadding="15,5,15,5"
@@ -56,7 +56,7 @@
 
             <inputLayout:SfTextInputLayout Hint="Segundo Apellido"
                                            ContainerType="Outlined"
-                                           Stroke="#34631a"
+                                           Stroke = "MediumPurple"
                                            ContainerBackground="white"
                                            Margin="10,0,10,0"
                                            InputViewPadding="15,5,15,5"
@@ -72,7 +72,7 @@
             <StackLayout Orientation="Horizontal">
                 <inputLayout:SfTextInputLayout Hint="* Calle"
                                                ContainerType="Outlined"
-                                               Stroke="#34631a"
+                                               Stroke = "MediumPurple"
                                                ContainerBackground="white"
                                                Margin="10,0,10,0"
                                                InputViewPadding="15,5,15,5"
@@ -88,7 +88,7 @@
 
                 <inputLayout:SfTextInputLayout Hint="* Numero"
                                                ContainerType="Outlined"
-                                               Stroke="#34631a"
+                                               Stroke = "MediumPurple"
                                                ContainerBackground="white"
                                                Margin="10,0,10,0"
                                                InputViewPadding="15,5,15,5"
@@ -106,7 +106,7 @@
             <StackLayout Orientation="Horizontal">
                 <inputLayout:SfTextInputLayout Hint="* Colonia"
                                                ContainerType="Outlined"
-                                               Stroke="#34631a"
+                                               Stroke = "MediumPurple"
                                                ContainerBackground="white"
                                                Margin="10,0,10,0"
                                                InputViewPadding="15,5,15,5"
@@ -122,7 +122,7 @@
 
                 <inputLayout:SfTextInputLayout Hint="* Codigo Postal"
                                                ContainerType="Outlined"
-                                               Stroke="#34631a"
+                                               Stroke = "MediumPurple"
                                                ContainerBackground="white"
                                                Margin="10,0,10,0"
                                                InputViewPadding="15,5,15,5"
@@ -139,7 +139,7 @@
 
             <inputLayout:SfTextInputLayout Hint="* Telefono"
                                            ContainerType="Outlined"
-                                           Stroke="#34631a"
+                                           Stroke = "MediumPurple"
                                            ContainerBackground="white"
                                            Margin="10,0,10,0"
                                            InputViewPadding="15,5,15,5"
@@ -155,7 +155,7 @@
 
             <inputLayout:SfTextInputLayout Hint="* RFC"
                                            ContainerType="Outlined"
-                                           Stroke="#34631a"
+                                           Stroke = "MediumPurple"
                                            ContainerBackground="white"
                                            Margin="10,0,10,0"
                                            InputViewPadding="15,5,15,5"
@@ -178,7 +178,7 @@
 
                 <inputLayout:SfTextInputLayout Hint="* Nombre del archivo"
                                                ContainerType="Outlined"
-                                               Stroke="#34631a"
+                                               Stroke = "MediumPurple"
                                                ContainerBackground="white"
                                                InputViewPadding="15,5,15,5"
                                                CharMaxLength="13"

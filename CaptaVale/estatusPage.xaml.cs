@@ -14,11 +14,14 @@ public partial class estatusPage : ContentPage
 
     public estatusPage()
     {
-        Prospecto prospecto = new Prospecto();
         InitializeComponent();
-        LlenarListaProspectos(prospecto);
+        LlenarListaProspectos();
     }
-    public async void LlenarListaProspectos(Prospecto prospecto)
+    private void btnRefresh_Clicked(object sender, EventArgs e)
+    {
+        LlenarListaProspectos();
+    }
+    public async void LlenarListaProspectos()
     {
         
         string selectProspectoQuery = "SELECT * FROM [dbo].[Prospectos];";
@@ -36,7 +39,7 @@ public partial class estatusPage : ContentPage
                         {
                             while (reader.Read())
                             {
-                                prospecto = new Prospecto
+                                Prospecto prospecto = new Prospecto
                                 {
                                     ProspectoID = reader.GetInt32(0),
                                     Nombre = reader.GetString(1),

@@ -14,7 +14,10 @@ public partial class evaluacionPage : ContentPage
 		InitializeComponent();
         LlenarListaProspectos();
     }
-    
+    private void btnRefresh_Clicked(object sender, EventArgs e)
+    {
+        LlenarListaProspectos();
+    }
     private async void LlenarListaProspectos()
     {
         List<Prospecto> prospectos = new List<Prospecto>();
