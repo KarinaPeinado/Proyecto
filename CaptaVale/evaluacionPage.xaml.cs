@@ -8,14 +8,9 @@ public partial class evaluacionPage : ContentPage
 {
     private MyPageViewModel viewModel;
     public List<Prospecto> Prospecto = new List<Prospecto>();
-    private DateTime lastTapTime = DateTime.Now;
     public evaluacionPage()
 	{
 		InitializeComponent();
-        LlenarListaProspectos();
-    }
-    private void btnRefresh_Clicked(object sender, EventArgs e)
-    {
         LlenarListaProspectos();
     }
     private async void LlenarListaProspectos()

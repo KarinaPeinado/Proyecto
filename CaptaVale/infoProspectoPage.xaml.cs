@@ -15,18 +15,19 @@ namespace CaptaVale;
 public partial class infoProspectoPage : ContentPage
 {
     Prospecto info;
-    private DateTime lastTapTime = DateTime.Now;
     private MyPageViewModelArchivos viewModel;
+    private List<Archivo> archivos;
     public infoProspectoPage(Prospecto prospecto)
 	{
-		InitializeComponent();
+        InitializeComponent();
         info = prospecto;
+        archivos = new List<Archivo>();
     }
     protected override void OnAppearing()
     {
         base.OnAppearing();
         cargarDatos();
-        ObtenerArchivoPorProspectoID();
+        CargarArchivosPorProspectoID();
     }
     private void Regresar(object sender, EventArgs e)
     {
@@ -53,9 +54,19 @@ public partial class infoProspectoPage : ContentPage
             labelObservaciones.Text = "Observaciones: " + info.Observaciones;
         }
     }
-    public Archivo ObtenerArchivoPorProspectoID()
+    private void CargarArchivosPorProspectoID()
     {
-        Archivo archivo = null;
+        archivos = ObtenerArchivosPorProspectoID();
+
+        if (archivos != null && archivos.Count > 0)
+        {
+            MostrarArchivosEnListView(archivos);
+        }
+    }
+
+    private List<Archivo> ObtenerArchivosPorProspectoID()
+    {
+        List<Archivo> archivos = new List<Archivo>();
 
         using (SqlConnection connection = ConexionSql.GetConnection())
         {
@@ -69,45 +80,40 @@ public partial class infoProspectoPage : ContentPage
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    if (reader.Read())
+                    while (reader.Read())
                     {
-                        archivo = new Archivo
+                        Archivo archivo = new Archivo
                         {
                             NombreDocumento = reader["NombreDocumento"].ToString(),
                             RutaDocumento = reader["RutaDocumento"].ToString(),
                             urlDocumento = reader["Contenido"].ToString()
                         };
+                        archivos.Add(archivo);
                     }
                 }
             }
         }
-        MostrarArchivoEnListView(archivo);
-        return archivo;
+        return archivos;
     }
 
-    private void MostrarArchivoEnListView(Archivo documento)
+    private void MostrarArchivosEnListView(List<Archivo> documentos)
     {
         if (viewModel == null)
         {
-            viewModel = new MyPageViewModelArchivos(new List<Archivo>());
+            viewModel = new MyPageViewModelArchivos(documentos);
             listViewDocumentos.ItemsSource = viewModel.MyItems;
         }
-
-        // Verifica si el documento no está ya en la lista
-        if (documento != null && !viewModel.MyItems.Any(item => item.NombreDocumento == documento.NombreDocumento))
+        else
         {
-            viewModel.MyItems.Add(documento);
+            foreach (Archivo documento in documentos)
+            {
+                // Verifica si el documento no está ya en la lista
+                if (!viewModel.MyItems.Any(item => item.NombreDocumento == documento.NombreDocumento))
+                {
+                    viewModel.MyItems.Add(documento);
+                }
+            }
         }
-        /* if (viewModel == null)
-         {
-             viewModel = new MyPageViewModelArchivos(new List<Archivo>());
-             listViewDocumentos.ItemsSource = viewModel.MyItems;
-         }
-         if (documento != null && !viewModel.MyItems.Contains(documento))
-         {
-             viewModel.MyItems.Add(documento);
-         }*/
-
         var dataTemplate = new DataTemplate(() =>
         {
             var textCell = new TextCell();
@@ -124,14 +130,14 @@ public partial class infoProspectoPage : ContentPage
         listViewDocumentos.SelectionMode = ListViewSelectionMode.None;
         listViewDocumentos.ItemTapped += OnItemTapped;
     }
-
     private async void OnItemTapped(object sender, ItemTappedEventArgs e)
     {
         var selectedItem = e.Item as Archivo;
 
         try
         {
-            Archivo archivo = ObtenerArchivoPorProspectoID();
+            // Obtener el archivo seleccionado
+            Archivo archivo = archivos.FirstOrDefault(a => a.NombreDocumento == selectedItem.NombreDocumento);
 
             if (archivo != null)
             {
@@ -169,11 +175,10 @@ public partial class infoProspectoPage : ContentPage
                         File = new ReadOnlyFile(rutaArchivo)
                     });
                 }
-
             }
             else
             {
-                await DisplayAlert("Error", "No se encontró un archivo para este prospecto", "Aceptar");
+                await DisplayAlert("Error", "No se encontró el archivo seleccionado", "Aceptar");
             }
         }
         catch (Exception ex)

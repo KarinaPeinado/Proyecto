@@ -17,10 +17,6 @@ public partial class estatusPage : ContentPage
         InitializeComponent();
         LlenarListaProspectos();
     }
-    private void btnRefresh_Clicked(object sender, EventArgs e)
-    {
-        LlenarListaProspectos();
-    }
     public async void LlenarListaProspectos()
     {
         
