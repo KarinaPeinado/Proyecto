@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+            x:Class="CaptaVale.MainPage"
+            xmlns:local="clr-namespace:CaptaVale"
+            BarTextColor="#212121"
+            SelectedTabColor="#34631a"
+            UnselectedTabColor="#C8C8C8">
+    
+    <local:clientePage Title="Registro" IconImageSource="registro_icon.png"/>
+    <local:estatusPage Title="Estatus" IconImageSource="estatus_icon.png" />
+    <local:evaluacionPage Title="Evaluación" IconImageSource="evaluacion_icon.png" />
+
+    <TabbedPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="#34631a" StatusBarStyle="LightContent" />
+    </TabbedPage.Behaviors>
+
+</TabbedPage>
+
+    

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             x:Class="CaptaVale.clientePage"
+             Title="registroPage">
+
+    <ScrollView>
+        <StackLayout>
+
+            <Label Text="INGRESE SUS DATOS"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center"
+                   FontSize="22"
+                   CharacterSpacing="2"
+                   Margin="0,20,0,0"
+                   FontAttributes="Bold"/>
+
+            <Label Text="* Campos obligatorios"
+                   VerticalOptions="Start" 
+                   HorizontalOptions="Start"
+                   FontSize="13"
+                   FontAttributes="Bold"
+                   Margin="20,10,0,10"/>
+
+            <inputLayout:SfTextInputLayout Hint="* Nombre(s)"
+                                           ContainerType="Outlined"
+                                           Stroke="#34631a"
+                                           ContainerBackground="white"
+                                           Margin="10,0,10,0"
+                                           InputViewPadding="15,5,15,5"
+                                           x:Name="Nombre">
+                <Entry Keyboard="Text"
+                       x:Name="Nombre_entry"
+                        MaxLength="255"/>
+                <inputLayout:SfTextInputLayout.HintLabelStyle>
+                    <inputLayout:LabelStyle FontSize="13" FontFamily="Lobster-Regular"/>
+                </inputLayout:SfTextInputLayout.HintLabelStyle>
+            </inputLayout:SfTextInputLayout>
+
+            <inputLayout:SfTextInputLayout Hint="* Primer Apellido"
+                                           ContainerType="Outlined"
+                                           Stroke="#34631a"
+                                           ContainerBackground="white"
+                                           Margin="10,0,10,0"
+                                           InputViewPadding="15,5,15,5"
+                                           x:Name="PrimerApellido">
+                <Entry Keyboard="Text"
+                       x:Name="PrimerApellido_entry"
+                        MaxLength="255"/>
+                <inputLayout:SfTextInputLayout.HintLabelStyle>
+                    <inputLayout:LabelStyle FontSize="13" FontFamily="Lobster-Regular"/>
+                </inputLayout:SfTextInputLayout.HintLabelStyle>
+            </inputLayout:SfTextInputLayout>
+
+            <inputLayout:SfTextInputLayout Hint="Segundo Apellido"
+                                           ContainerType="Outlined"
+                                           Stroke="#34631a"
+                                           ContainerBackground="white"
+                                           Margin="10,0,10,0"
+                                           InputViewPadding="15,5,15,5"
+                                           x:Name="SegundoApellido">
+                <Entry Keyboard="Text"
+                       x:Name="SegundoApellido_entry"
+                        MaxLength="255"/>
+                <inputLayout:SfTextInputLayout.HintLabelStyle>
+                    <inputLayout:LabelStyle FontSize="13" FontFamily="Lobster-Regular"/>
+                </inputLayout:SfTextInputLayout.HintLabelStyle>
+            </inputLayout:SfTextInputLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <inputLayout:SfTextInputLayout Hint="* Calle"
+                                               ContainerType="Outlined"
+                                               Stroke="#34631a"
+                                               ContainerBackground="white"
+                                               Margin="10,0,10,0"
+                                               InputViewPadding="15,5,15,5"
+                                               x:Name="Calle"
+                                               WidthRequest="270">
+                    <Entry Keyboard="Text"
+                       x:Name="Calle_entry"
+                            MaxLength="255"/>
+                    <inputLayout:SfTextInputLayout.HintLabelStyle>
+                        <inputLayout:LabelStyle FontSize="13" FontFamily="Lobster-Regular"/>
+                    </inputLayout:SfTextInputLayout.HintLabelStyle>
+                </inputLayout:SfTextInputLayout>
+
+                <inputLayout:SfTextInputLayout Hint="* Numero"
+                                               ContainerType="Outlined"
+                                               Stroke="#34631a"
+                                               ContainerBackground="white"
+                                               Margin="10,0,10,0"
+                                               InputViewPadding="15,5,15,5"
+                                               x:Name="Numero"
+                                               WidthRequest="100">
+                    <Entry Keyboard="Text"
+                       x:Name="Numero_entry"
+                            MaxLength="20"/>
+                    <inputLayout:SfTextInputLayout.HintLabelStyle>
+                        <inputLayout:LabelStyle FontSize="13" FontFamily="Lobster-Regular"/>
+                    </inputLayout:SfTextInputLayout.HintLabelStyle>
+                </inputLayout:SfTextInputLayout>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <inputLayout:SfTextInputLayout Hint="* Colonia"
+                                               ContainerType="Outlined"
+                                               Stroke="#34631a"
+                                               ContainerBackground="white"
+                                               Margin="10,0,10,0"
+                                               InputViewPadding="15,5,15,5"
+                                               x:Name="Colonia"
+                                               WidthRequest="220">
+                    <Entry Keyboard="Text"
+                       x:Name="Colonia_entry"
+                            MaxLength="255"/>
+                    <inputLayout:SfTextInputLayout.HintLabelStyle>
+                        <inputLayout:LabelStyle FontSize="13" FontFamily="Lobster-Regular"/>
+                    </inputLayout:SfTextInputLayout.HintLabelStyle>
+                </inputLayout:SfTextInputLayout>
+
+                <inputLayout:SfTextInputLayout Hint="* Codigo Postal"
+                                               ContainerType="Outlined"
+                                               Stroke="#34631a"
+                                               ContainerBackground="white"
+                                               Margin="10,0,10,0"
+                                               InputViewPadding="15,5,15,5"
+                                               x:Name="CodigoPostal"
+                                               WidthRequest="150">
+                    <Entry Keyboard="Telephone"
+                       x:Name="CodigoPostal_entry"
+                            MaxLength="10"/>
+                    <inputLayout:SfTextInputLayout.HintLabelStyle>
+                        <inputLayout:LabelStyle FontSize="13" FontFamily="Lobster-Regular"/>
+                    </inputLayout:SfTextInputLayout.HintLabelStyle>
+                </inputLayout:SfTextInputLayout>
+            </StackLayout>
+
+            <inputLayout:SfTextInputLayout Hint="* Telefono"
+                                           ContainerType="Outlined"
+                                           Stroke="#34631a"
+                                           ContainerBackground="white"
+                                           Margin="10,0,10,0"
+                                           InputViewPadding="15,5,15,5"
+                                           CharMaxLength="10"
+                                           x:Name="Telefono">
+                <Entry Keyboard="Telephone"
+                       x:Name="Telefono_entry"
+                        MaxLength="10"/>
+                <inputLayout:SfTextInputLayout.HintLabelStyle>
+                    <inputLayout:LabelStyle FontSize="13" FontFamily="Lobster-Regular"/>
+                </inputLayout:SfTextInputLayout.HintLabelStyle>
+            </inputLayout:SfTextInputLayout>
+
+            <inputLayout:SfTextInputLayout Hint="* RFC"
+                                           ContainerType="Outlined"
+                                           Stroke="#34631a"
+                                           ContainerBackground="white"
+                                           Margin="10,0,10,0"
+                                           InputViewPadding="15,5,15,5"
+                                           CharMaxLength="13"
+                                           x:Name="RFC">
+                <Entry Keyboard="Text"
+                       x:Name="RFC_entry"
+                        MaxLength="15"/>
+                <inputLayout:SfTextInputLayout.HintLabelStyle>
+                    <inputLayout:LabelStyle FontSize="13" FontFamily="Lobster-Regular"/>
+                </inputLayout:SfTextInputLayout.HintLabelStyle>
+            </inputLayout:SfTextInputLayout>
+
+            <Label Text="Seleccione sus documentos"
+                       FontSize="13"
+                       Margin="20,5,0,5"/>
+
+            <StackLayout x:Name="stackDocumentos"
+                         Orientation="Horizontal">
+
+                <inputLayout:SfTextInputLayout Hint="* Nombre del archivo"
+                                               ContainerType="Outlined"
+                                               Stroke="#34631a"
+                                               ContainerBackground="white"
+                                               InputViewPadding="15,5,15,5"
+                                               CharMaxLength="13"
+                                               x:Name="NombreArchivo"
+                                               WidthRequest="320"
+                                               Margin="10,0,10,0">
+                    <Entry Keyboard="Text"
+                        x:Name="NombreArchivo_entry"/>
+                    <inputLayout:SfTextInputLayout.HintLabelStyle>
+                        <inputLayout:LabelStyle FontSize="13" FontFamily="Lobster-Regular"/>
+                    </inputLayout:SfTextInputLayout.HintLabelStyle>
+                </inputLayout:SfTextInputLayout>
+
+                <Button BackgroundColor="#f1fff7"
+                        TextColor="Black"
+                        FontSize="25"
+                        WidthRequest="50"
+                        HeightRequest="50"
+                        Text="+"
+                        Margin="10,0,10,15"
+                        HorizontalOptions="Fill"
+                        Clicked="OnPickFileButtonClicked"/>
+            </StackLayout>
+
+            <Label Text="Archivos cargados"
+                       FontSize="13"
+                       Margin="20,0,0,0"/>
+
+            <ListView x:Name = "listViewDocumentos">
+                
+            </ListView>
+
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="Center"
+                         Margin="0,15,0,0">
+                <Button Text="Enviar"
+                        BackgroundColor="LightGreen"
+                        Margin="20,5,20,5"
+                        TextColor="Black"
+                        FontSize="15"
+                        WidthRequest="110"
+                        HeightRequest="40"
+                        ImageSource="enviar.png"
+                        ContentLayout="Left, 20"
+                        Clicked="btnInsert_Clicked"/>
+
+                <Button Text="Salir"
+                        VerticalOptions="Center"
+                        BackgroundColor="LightCoral"
+                        Margin="20,5,20,5"
+                        TextColor="Black"
+                        FontSize="15"
+                        WidthRequest="110"
+                        HeightRequest="40"
+                        ImageSource="cerrar.png"
+                        ContentLayout="Left, 20"
+                        Clicked="btnClose_Clicked"/>
+            </StackLayout>
+                
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
