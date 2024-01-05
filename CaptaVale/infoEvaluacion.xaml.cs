@@ -70,7 +70,7 @@ public partial class infoEvaluacion : ContentPage
 
         if (!string.IsNullOrEmpty(observacion))
         {
-            string updateEstatusQuery = "UPDATE [dbo].[Prospectos] SET Estatus = 'Rechazado', ObservacionRechazo = @ObservacionRechazo WHERE ID = @ProspectoID;";
+            string updateEstatusQuery = "UPDATE [dbo].[Prospectos] SET Estatus = 'Rechazado', Observaciones = @Observaciones WHERE ID = @ProspectoID;";
 
             using (SqlConnection connection = ConexionSql.GetConnection())
             {
@@ -79,7 +79,7 @@ public partial class infoEvaluacion : ContentPage
                 using (SqlCommand command = new SqlCommand(updateEstatusQuery, connection))
                 {
                     command.Parameters.AddWithValue("@ProspectoID", info.ProspectoID);
-                    command.Parameters.AddWithValue("@ObservacionRechazo", observacion);
+                    command.Parameters.AddWithValue("@Observaciones", observacion);
 
                     try
                     {
@@ -101,11 +101,11 @@ public partial class infoEvaluacion : ContentPage
     {
         Nombre_entry.Text = info.Nombre;
         PrimerApellido_entry.Text = info.PrimerApellido;
-        SegundoApellido_entry.Text = info.SegundoApellido;
+        SegundoApellido_entry.Text = info.SegundoApellido ?? " ";
         Calle_entry.Text = info.Calle;
-        Numero_entry.Text = info.Numero;
+        Numero_entry.Text = info.Numero.ToString();
         Colonia_entry.Text = info.Colonia;
-        CodigoPostal_entry.Text = info.CodigoPostal.ToString();
+        CodigoPostal_entry.Text = info.CodigoPostal;
         Telefono_entry.Text = info.Telefono;
         RFC_entry.Text = info.RFC;
     }
@@ -200,7 +200,7 @@ public partial class infoEvaluacion : ContentPage
             {
                 string containerName = "docs";
                 string accountName = "captavale";
-                string accountKey = "2WaUOKsE9aZM9uTwDgwWWklQSM754mSvjDx8jMgawAXbYrE0C6otWOxnzn7/vuAeZderDiVfDfNd+AStOD6J6A==";
+                string accountKey = "sZk9o/X0TGHbUQA/3jlgWbktsp2sWYhqiyyS99xEkWo6PLGM/2qlcSiCDaiBVQImPJ1Tnz2gyqOt+ASt6OiJ0g==";
                 string blobName = selectedItem.NombreDocumento;
                 string blobUrl = $"https://{accountName}.blob.core.windows.net/{containerName}/{blobName}";
 

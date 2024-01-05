@@ -94,9 +94,9 @@
                                                InputViewPadding="15,5,15,5"
                                                x:Name="Numero"
                                                WidthRequest="100">
-                    <Entry Keyboard="Text"
+                    <Entry Keyboard="Telephone"
                        x:Name="Numero_entry"
-                            MaxLength="20"/>
+                            MaxLength="10"/>
                     <inputLayout:SfTextInputLayout.HintLabelStyle>
                         <inputLayout:LabelStyle FontSize="13" FontFamily="Lobster-Regular"/>
                     </inputLayout:SfTextInputLayout.HintLabelStyle>

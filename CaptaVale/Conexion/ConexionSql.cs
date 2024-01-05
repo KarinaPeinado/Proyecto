@@ -11,7 +11,7 @@ namespace CaptaVale.Conexion
 {
     public class ConexionSql
     {
-        private static string _connectionString = "Server=tcp:captavale.database.windows.net,1433;Initial Catalog=CaptaVale;Persist Security Info=False;User ID=consulta;Password=KarinaG_123!!!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        private static string _connectionString = "Server=tcp:captavale.database.windows.net,1433;Initial Catalog=captavale;Persist Security Info=False;User ID=consulta;Password=KarinaG_123!!!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
         public static SqlConnection GetConnection()
         {

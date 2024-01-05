@@ -79,6 +79,125 @@ public partial class clientePage : ContentPage
         }
     }
 
+    /* private async void btnInsert_Clicked(object sender, EventArgs e)
+     {
+         bool result = await DisplayAlert("Confirmar", "¿Estás seguro de que tus datos son correctos?", "Sí", "No");
+
+         if (result)
+         {
+             ConexionSql dbConnection = new ConexionSql();
+
+             try
+             {
+                 if (string.IsNullOrWhiteSpace(Nombre_entry.Text) ||
+                     string.IsNullOrWhiteSpace(PrimerApellido_entry.Text) ||
+                     string.IsNullOrWhiteSpace(Calle_entry.Text) ||
+                     string.IsNullOrWhiteSpace(Numero_entry.Text) ||
+                     string.IsNullOrWhiteSpace(Colonia_entry.Text) ||
+                     string.IsNullOrWhiteSpace(CodigoPostal_entry.Text) ||
+                     string.IsNullOrWhiteSpace(Telefono_entry.Text) ||
+                     string.IsNullOrWhiteSpace(RFC_entry.Text) ||
+                     string.IsNullOrWhiteSpace(NombreArchivo_entry.Text))
+                 {
+                     await DisplayAlert("Error", "Todos los campos son obligatorios.", "Aceptar");
+                 }
+                 else
+                 {
+                     string nombre = Nombre_entry.Text;
+                     string primerApellido = PrimerApellido_entry.Text;
+                     string segundoApellido = SegundoApellido_entry.Text;
+                     string calle = Calle_entry.Text;
+                     string numero = Numero_entry.Text;
+                     string colonia = Colonia_entry.Text;
+                     int codigoPostal = int.Parse(CodigoPostal_entry.Text);
+                     string telefono = Telefono_entry.Text;
+                     string rfc = RFC_entry.Text;
+                     string nombreArchivo = NombreArchivo_entry.Text;
+
+                     if (dbConnection.OpenConnection())
+                     {
+                         using (SqlConnection connection = ConexionSql.GetConnection())
+                         {
+                             connection.Open();
+
+                             string insertProspectoQuery = "INSERT INTO [dbo].[Prospectos] (Nombre, PrimerApellido, SegundoApellido, Calle, Numero, Colonia, CodigoPostal, Telefono, RFC, Estatus) " +
+                                                         "VALUES (@Nombre, @PrimerApellido, @SegundoApellido, @Calle, @Numero, @Colonia, @CodigoPostal, @Telefono, @RFC, @Estatus); SELECT SCOPE_IDENTITY()";
+                             int prospectoID;
+                             using (SqlCommand command = new SqlCommand(insertProspectoQuery, connection))
+                             {
+                                 command.Parameters.AddWithValue("@Nombre", nombre);
+                                 command.Parameters.AddWithValue("@PrimerApellido", primerApellido);
+
+                                 if (string.IsNullOrEmpty(segundoApellido)) command.Parameters.AddWithValue("@SegundoApellido", DBNull.Value);                 
+                                 else command.Parameters.AddWithValue("@SegundoApellido", segundoApellido);
+
+                                 command.Parameters.AddWithValue("@Calle", calle);
+                                 command.Parameters.AddWithValue("@Numero", numero);
+                                 command.Parameters.AddWithValue("@Colonia", colonia);
+                                 command.Parameters.AddWithValue("@CodigoPostal", codigoPostal);
+                                 command.Parameters.AddWithValue("@Telefono", telefono);
+                                 command.Parameters.AddWithValue("@RFC", rfc);
+                                 command.Parameters.AddWithValue("@Estatus", "Enviado");
+
+                                 prospectoID = Convert.ToInt32(command.ExecuteScalar());
+                             }
+
+                             List<Archivo> archivos = documentos;
+                             foreach (Archivo archivo in archivos)
+                             {
+                                 string containerName = "docs";
+                                 string accountName = "captavale";
+                                 string accountKey = "sZk9o/X0TGHbUQA/3jlgWbktsp2sWYhqiyyS99xEkWo6PLGM/2qlcSiCDaiBVQImPJ1Tnz2gyqOt+ASt6OiJ0g==";
+                                 string blobName = archivo.NombreDocumento;
+                                 string blobUrl = $"https://{accountName}.blob.core.windows.net/{containerName}/{blobName}";
+
+                                 CloudBlockBlob blob = new CloudBlockBlob(new Uri(blobUrl), new StorageCredentials(accountName, accountKey));
+
+                                 // Obtener un token de firma compartida
+                                 string sasToken = blob.GetSharedAccessSignature(new SharedAccessBlobPolicy
+                                 {
+                                     Permissions = SharedAccessBlobPermissions.Write,
+                                     SharedAccessExpiryTime = DateTime.UtcNow.AddHours(1), // Establece el tiempo de expiración adecuado
+                                 });
+
+                                 // Agregar el token de firma compartida al URI del blob
+                                 Uri blobUriWithSas = new Uri(blob.Uri, sasToken);
+
+                                 // Crear un blob con el URI que contiene el token de firma compartida
+                                 CloudBlockBlob blobWithSas = new CloudBlockBlob(blobUriWithSas);
+
+                                 using (var fileStream = new MemoryStream(archivo.ContenidoDocumento))
+                                 {
+                                     await blobWithSas.UploadFromStreamAsync(fileStream);
+                                 }
+
+                                 string insertDocumentosQuery = "INSERT INTO [dbo].[Documentos] (ProspectoID, NombreDocumento, RutaDocumento, Contenido) " +
+                                                                "VALUES (@ProspectoID, @NombreDocumento, @RutaDocumento, @Contenido)";
+
+                                 using (SqlCommand command = new SqlCommand(insertDocumentosQuery, connection))
+                                 {
+                                     command.Parameters.AddWithValue("@ProspectoID", prospectoID);
+                                     command.Parameters.AddWithValue("@NombreDocumento", archivo.NombreDocumento);
+                                     command.Parameters.AddWithValue("@RutaDocumento", archivo.RutaDocumento);
+                                     command.Parameters.AddWithValue("@Contenido", blobUrl);
+                                     command.ExecuteNonQuery();
+                                 }
+                             }
+                             LimpiarCampos();
+                         }
+                     }
+
+                     await DisplayAlert("Éxito", "Tus datos se han enviado a revisión de forma correcta.", "Aceptar");
+                     dbConnection.CloseConnection();
+                     listViewDocumentos.ItemsSource = null;
+                 }
+             }
+             catch (Exception ex)
+             {
+                 await DisplayAlert("ERROR", ex.Message, "Aceptar");
+             }
+         }
+     }*/
     private async void btnInsert_Clicked(object sender, EventArgs e)
     {
         bool result = await DisplayAlert("Confirmar", "¿Estás seguro de que tus datos son correctos?", "Sí", "No");
@@ -120,105 +239,97 @@ public partial class clientePage : ContentPage
                         {
                             connection.Open();
 
-                            string insertProspectoQuery = "INSERT INTO [dbo].[Prospectos] (Nombre, PrimerApellido, SegundoApellido, Calle, Numero, Colonia, CodigoPostal, Telefono, RFC, Estatus) " +
-                                                        "VALUES (@Nombre, @PrimerApellido, @SegundoApellido, @Calle, @Numero, @Colonia, @CodigoPostal, @Telefono, @RFC, @Estatus); SELECT SCOPE_IDENTITY()";
-                            int prospectoID;
-                            using (SqlCommand command = new SqlCommand(insertProspectoQuery, connection))
+                            using (SqlTransaction transaction = connection.BeginTransaction())
                             {
-                                command.Parameters.AddWithValue("@Nombre", nombre);
-                                command.Parameters.AddWithValue("@PrimerApellido", primerApellido);
-
-                                if (string.IsNullOrEmpty(segundoApellido)) command.Parameters.AddWithValue("@SegundoApellido", DBNull.Value);                 
-                                else command.Parameters.AddWithValue("@SegundoApellido", segundoApellido);
-
-                                command.Parameters.AddWithValue("@Calle", calle);
-                                command.Parameters.AddWithValue("@Numero", numero);
-                                command.Parameters.AddWithValue("@Colonia", colonia);
-                                command.Parameters.AddWithValue("@CodigoPostal", codigoPostal);
-                                command.Parameters.AddWithValue("@Telefono", telefono);
-                                command.Parameters.AddWithValue("@RFC", rfc);
-                                command.Parameters.AddWithValue("@Estatus", "Enviado");
-
-                                prospectoID = Convert.ToInt32(command.ExecuteScalar());
-                            }
-
-                            List<Archivo> archivos = documentos;
-                            foreach (Archivo archivo in archivos)
-                            {
-                                string containerName = "docs";
-                                string accountName = "captavale";
-                                string accountKey = "2WaUOKsE9aZM9uTwDgwWWklQSM754mSvjDx8jMgawAXbYrE0C6otWOxnzn7/vuAeZderDiVfDfNd+AStOD6J6A==";
-                                string blobName = archivo.NombreDocumento;
-                                string blobUrl = $"https://{accountName}.blob.core.windows.net/{containerName}/{blobName}";
-
-                                CloudBlockBlob blob = new CloudBlockBlob(new Uri(blobUrl), new StorageCredentials(accountName, accountKey));
-
-                                string authorizationHeader = blob.GetSharedAccessSignature(new SharedAccessBlobPolicy()
+                                try
                                 {
-                                    Permissions = SharedAccessBlobPermissions.Read,
-                                    SharedAccessExpiryTime = DateTime.UtcNow.AddHours(1)
-                                });
+                                    string insertProspectoQuery = "INSERT INTO [dbo].[Prospectos] (Nombre, PrimerApellido, SegundoApellido, Calle, Numero, Colonia, CodigoPostal, Telefono, RFC, Estatus) " +
+                                                                 "VALUES (@Nombre, @PrimerApellido, @SegundoApellido, @Calle, @Numero, @Colonia, @CodigoPostal, @Telefono, @RFC, @Estatus); SELECT SCOPE_IDENTITY()";
 
-                                // Obtener un token de firma compartida
-                                string sasToken = blob.GetSharedAccessSignature(new SharedAccessBlobPolicy
-                                {
-                                    Permissions = SharedAccessBlobPermissions.Write,
-                                    SharedAccessExpiryTime = DateTime.UtcNow.AddHours(1), // Establece el tiempo de expiración adecuado
-                                });
+                                    int prospectoID;
+                                    using (SqlCommand command = new SqlCommand(insertProspectoQuery, connection, transaction))
+                                    {
+                                        command.Parameters.AddWithValue("@Nombre", nombre);
+                                        command.Parameters.AddWithValue("@PrimerApellido", primerApellido);
 
-                                // Agregar el token de firma compartida al URI del blob
-                                Uri blobUriWithSas = new Uri(blob.Uri, sasToken);
+                                        if (string.IsNullOrEmpty(segundoApellido)) command.Parameters.AddWithValue("@SegundoApellido", DBNull.Value);
+                                        else command.Parameters.AddWithValue("@SegundoApellido", segundoApellido);
 
-                                // Crear un blob con el URI que contiene el token de firma compartida
-                                CloudBlockBlob blobWithSas = new CloudBlockBlob(blobUriWithSas);
+                                        command.Parameters.AddWithValue("@Calle", calle);
+                                        command.Parameters.AddWithValue("@Numero", numero);
+                                        command.Parameters.AddWithValue("@Colonia", colonia);
+                                        command.Parameters.AddWithValue("@CodigoPostal", codigoPostal);
+                                        command.Parameters.AddWithValue("@Telefono", telefono);
+                                        command.Parameters.AddWithValue("@RFC", rfc);
+                                        command.Parameters.AddWithValue("@Estatus", "Enviado");
 
-                                using (var fileStream = new MemoryStream(archivo.ContenidoDocumento))
-                                {
-                                    await blobWithSas.UploadFromStreamAsync(fileStream);
+                                        prospectoID = Convert.ToInt32(command.ExecuteScalar());
+                                    }
+
+                                    string insertDocumentosQuery = "INSERT INTO [dbo].[Documentos] (ProspectoID, NombreDocumento, RutaDocumento, Contenido) " +
+                                                                   "VALUES (@ProspectoID, @NombreDocumento, @RutaDocumento, @Contenido)";
+
+                                    List<Archivo> archivos = documentos;
+                                    foreach (Archivo archivo in archivos)
+                                    {
+                                        string containerName = "docs";
+                                        string accountName = "captavale";
+                                        string accountKey = "sZk9o/X0TGHbUQA/3jlgWbktsp2sWYhqiyyS99xEkWo6PLGM/2qlcSiCDaiBVQImPJ1Tnz2gyqOt+ASt6OiJ0g==";
+                                        string blobName = archivo.NombreDocumento;
+                                        string blobUrl = $"https://{accountName}.blob.core.windows.net/{containerName}/{blobName}";
+
+                                        CloudBlockBlob blob = new CloudBlockBlob(new Uri(blobUrl), new StorageCredentials(accountName, accountKey));
+
+                                        // Obtener un token de firma compartida
+                                        string sasToken = blob.GetSharedAccessSignature(new SharedAccessBlobPolicy
+                                        {
+                                            Permissions = SharedAccessBlobPermissions.Write,
+                                            SharedAccessExpiryTime = DateTime.UtcNow.AddHours(1), // Establece el tiempo de expiración adecuado
+                                        });
+
+                                        // Agregar el token de firma compartida al URI del blob
+                                        Uri blobUriWithSas = new Uri(blob.Uri, sasToken);
+
+                                        // Crear un blob con el URI que contiene el token de firma compartida
+                                        CloudBlockBlob blobWithSas = new CloudBlockBlob(blobUriWithSas);
+
+                                        using (var fileStream = new MemoryStream(archivo.ContenidoDocumento))
+                                        {
+                                            await blobWithSas.UploadFromStreamAsync(fileStream);
+                                        }
+
+                                        using (SqlCommand command = new SqlCommand(insertDocumentosQuery, connection, transaction))
+                                        {
+                                            command.Parameters.AddWithValue("@ProspectoID", prospectoID);
+                                            command.Parameters.AddWithValue("@NombreDocumento", archivo.NombreDocumento);
+                                            command.Parameters.AddWithValue("@RutaDocumento", archivo.RutaDocumento);
+                                            command.Parameters.AddWithValue("@Contenido", blobUrl);
+                                            command.ExecuteNonQuery();
+                                        }
+
+                                        transaction.Commit();
+
+                                        LimpiarCampos();
+                                        listViewDocumentos.ItemsSource = null;
+                                        await DisplayAlert("Éxito", "Tus datos se han enviado a revisión de forma correcta.", "Aceptar");
+                                    }
                                 }
-
-                                //blobUrl += authorizationHeader;
-
-                                string insertDocumentosQuery = "INSERT INTO [dbo].[Documentos] (ProspectoID, NombreDocumento, RutaDocumento, Contenido) " +
-                                                               "VALUES (@ProspectoID, @NombreDocumento, @RutaDocumento, @Contenido)";
-
-                                using (SqlCommand command = new SqlCommand(insertDocumentosQuery, connection))
+                                catch (Exception ex)
                                 {
-                                    command.Parameters.AddWithValue("@ProspectoID", prospectoID);
-                                    command.Parameters.AddWithValue("@NombreDocumento", archivo.NombreDocumento);
-                                    command.Parameters.AddWithValue("@RutaDocumento", archivo.RutaDocumento);
-                                    command.Parameters.AddWithValue("@Contenido", blobUrl);
-                                    command.ExecuteNonQuery();
+                                    transaction.Rollback();
+                                    await DisplayAlert("Error", "Ocurrió un problema al insertar en Documentos o Prospectos: " + ex.Message, "Aceptar");
                                 }
                             }
-                            LimpiarCampos();
                         }
                     }
-
-                    Prospecto nuevoProspecto = new Prospecto
-                    {
-                        Nombre = nombre,
-                        PrimerApellido = primerApellido,
-                        SegundoApellido = segundoApellido,
-                        Calle = calle, 
-                        Numero = numero,
-                        Colonia = colonia,
-                        CodigoPostal = codigoPostal,
-                        Telefono = telefono,
-                        RFC = rfc
-                    };
-
-                    await DisplayAlert("Éxito", "Tus datos se han enviado a revisión de forma correcta.", "Aceptar");
                     dbConnection.CloseConnection();
-                    listViewDocumentos.ItemsSource = null;
+                    
                 }
             }
-            catch (Exception ex)
-            {
-                await DisplayAlert("ERROR", ex.Message, "Aceptar");
-            }
+            catch (Exception ex){ }
         }
     }
+
 
     private async void btnClose_Clicked(object sender, EventArgs e)
     {

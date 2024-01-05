@@ -37,22 +37,16 @@ public partial class infoProspectoPage : ContentPage
     {
         Nombre_entry.Text = info.Nombre;
         PrimerApellido_entry.Text = info.PrimerApellido;
-        SegundoApellido_entry.Text = info.SegundoApellido;
+        SegundoApellido_entry.Text = info.SegundoApellido ?? " ";
         Calle_entry.Text = info.Calle;
-        Numero_entry.Text = info.Numero;
+        Numero_entry.Text = info.Numero.ToString();
         Colonia_entry.Text = info.Colonia;
-        CodigoPostal_entry.Text = info.CodigoPostal.ToString();
+        CodigoPostal_entry.Text = info.CodigoPostal;
         Telefono_entry.Text = info.Telefono;
         RFC_entry.Text = info.RFC;
         labelEstatus.Text = "Estatus: " + info.Estatus;
-        if (info.Observaciones == null)
-        {
-            labelObservaciones.IsVisible = false;
-        }
-        else
-        {
-            labelObservaciones.Text = "Observaciones: " + info.Observaciones;
-        }
+        if (info.Observaciones == null) { labelObservaciones.IsVisible = false; }
+        else { labelObservaciones.Text = "Observaciones: " + info.Observaciones; }
     }
     private void CargarArchivosPorProspectoID()
     {
@@ -143,7 +137,7 @@ public partial class infoProspectoPage : ContentPage
             {
                 string containerName = "docs";
                 string accountName = "captavale";
-                string accountKey = "2WaUOKsE9aZM9uTwDgwWWklQSM754mSvjDx8jMgawAXbYrE0C6otWOxnzn7/vuAeZderDiVfDfNd+AStOD6J6A==";
+                string accountKey = "sZk9o/X0TGHbUQA/3jlgWbktsp2sWYhqiyyS99xEkWo6PLGM/2qlcSiCDaiBVQImPJ1Tnz2gyqOt+ASt6OiJ0g==";
                 string blobName = selectedItem.NombreDocumento;
                 string blobUrl = $"https://{accountName}.blob.core.windows.net/{containerName}/{blobName}";
 

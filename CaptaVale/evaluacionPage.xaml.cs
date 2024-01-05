@@ -36,7 +36,7 @@ public partial class evaluacionPage : ContentPage
                                     ProspectoID = reader.GetInt32(0),
                                     Nombre = reader.GetString(1),
                                     PrimerApellido = reader.GetString(2),
-                                    SegundoApellido = reader.IsDBNull(3) ? null : reader.GetString(3),
+                                    SegundoApellido = reader.IsDBNull(3) ? "-" : reader.GetString(3),
                                     Estatus = reader.GetString(10)
                                 };
                                 prospectos.Add(prospecto);
@@ -163,9 +163,9 @@ public partial class evaluacionPage : ContentPage
                             PrimerApellido = reader.GetString(2),
                             SegundoApellido = reader.IsDBNull(3) ? null : reader.GetString(3),
                             Calle = reader.GetString(4),
-                            Numero = reader.GetString(5),
+                            Numero = reader.GetInt32(5),
                             Colonia = reader.GetString(6),
-                            CodigoPostal = reader.GetInt32(7),
+                            CodigoPostal = reader.GetString(7),
                             Telefono = reader.GetString(8),
                             RFC = reader.GetString(9),
                             Estatus = reader.GetString(10),
